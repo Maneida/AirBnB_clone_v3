@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+""" Index api methods """
 from api.v1.views import app_views
 from flask import jsonify
 from models import storage
