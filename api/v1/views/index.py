@@ -11,8 +11,8 @@ from models.state import State
 from models.user import User
 
 @app_views.route('/', defaults={'page': 'index'})
-@app_views.route('/<page>')
-def api_status(page):
+@app_views.route('/status')
+def api_status():
     """Get the status of the API.
 
     Returns:
