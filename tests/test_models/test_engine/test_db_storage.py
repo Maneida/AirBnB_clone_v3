@@ -90,7 +90,7 @@ class TestFileStorage(unittest.TestCase):
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_get(self):
         """Test for getting an instance db storage"""
-        temp = {"name" : "Test"}
+        temp = {"name": "Test"}
         obj = State(**temp)
         storage.new(obj)
         storage.save()
@@ -100,10 +100,10 @@ class TestFileStorage(unittest.TestCase):
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_count(self):
         """Tests count method for counting objects/instances"""
-        temp = {"name" : "TestState"}
+        temp = {"name": "TestState"}
         obj_state = State(**temp)
         storage.new(obj_state)
-        temp2 = {"name" : "TestCity", "state_id" : obj_state.id}
+        temp2 = {"name": "TestCity", "state_id": obj_state.id}
         obj_city = City(**temp2)
         storage.new(obj_city)
         storage.save()

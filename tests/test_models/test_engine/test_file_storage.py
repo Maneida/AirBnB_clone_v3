@@ -118,7 +118,7 @@ class TestFileStorage(unittest.TestCase):
     def test_get(self):
         """Tests get method getting and instance from file storage"""
         storage = FileStorage()
-        temp = {"name" : "Test"}
+        temp = {"name": "Test"}
         obj = State(**temp)
         storage.new(obj)
         storage.save()
@@ -129,10 +129,10 @@ class TestFileStorage(unittest.TestCase):
     def test_count(self):
         """Tests count method for counting instances"""
         storage = FileStorage()
-        temp = {"name" : "TestState"}
+        temp = {"name": "TestState"}
         obj_state = State(**temp)
         storage.new(obj_state)
-        temp2 = {"name" : "TestCity", "state_id" : obj_state.id}
+        temp2 = {"name": "TestCity", "state_id": obj_state.id}
         obj_city = City(**temp2)
         storage.new(obj_city)
         storage.save()

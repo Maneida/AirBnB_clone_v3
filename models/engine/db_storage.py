@@ -84,6 +84,7 @@ class DBStorage:
             objs = self.all(cls)
             return objs.get(key)
         return None
+
     def count(self, cls):
         """ Returns count of objects in a class passed as argument
         """
