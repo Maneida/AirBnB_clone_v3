@@ -79,7 +79,7 @@ class DBStorage:
         """ Gets and object through its class and id, passed as
             arguments
         """
-        if id and cls:
+        if cls in classes.values() and id:
             key = '{}.{}'.format(cls, id)
             objs = self.all(cls)
             return objs.get(key)
