@@ -10,6 +10,7 @@ from models.review import Review
 from models.state import State
 from models.user import User
 
+
 @app_views.route('/', defaults={'page': 'index'})
 @app_views.route('/status')
 def api_status():
@@ -19,6 +20,7 @@ def api_status():
         JSON object: {"status": "OK"}
     """
     return jsonify({"status": "OK"})
+
 
 @app_views.route('/stats', methods=['GET'], strict_slashes=False)
 def api_stats():
