@@ -74,13 +74,13 @@ class FileStorage:
             arguments
         """
         if cls in classes.values() and id:
-            key = '{}.{}'.format(cls, id)
+            key = '{}.{}'.format(cls.__name__, id)
             objs = self.all(cls)
             return objs.get(key)
         return None
 
-    def count(self, cls):
+    def count(self, cls=None):
         """ Returns count of objects in a class passed as argument
         """
-        all_cls_obj = self.all(cls)
+        all_cls_objs = self.all(cls)
         return len(all_cls_objs)
