@@ -38,3 +38,6 @@ def api_states(state_id):
         key = 'State' + '.' + state_id
         
         return(jsonify(states[key]))
+"""
+RESTful API for the State class
+"""
