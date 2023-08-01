@@ -103,16 +103,16 @@ class TestFileStorage(unittest.TestCase):
         initial_count = storage.count()
         temp = {"name": "TestState"}
         state_obj = State(**temp)
-        storage.new(state_obj)  # Use 'storage' directly.
-        storage.save()
+        models.storage.new(state_obj)  # Use 'models.storage' due to import.
+        models.storage.save()
 
-        updated_count = storage.count()  # Use 'storage' directly.
+        updated_count = models.storage.count()  
         self.assertEqual(initial_count + 1, updated_count)
 
         temp2 = {"name": "TestCity", "state_id": state_obj.id}
         city_obj = City(**temp2)
-        storage.new(city_obj)  # Use 'storage' directly.
-        storage.save()
+        models.storage.new(city_obj)
+        models.storage.save()
 
-        updated_count = storage.count()
+        updated_count = models.storage.count()
         self.assertEqual(initial_count + 2, updated_count)
