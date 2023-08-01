@@ -3,7 +3,7 @@
 RESTful API for the City class
 """
 from api.v1.views import app_views
-from flask import abort, Blueprint, Flask, jsonify
+from flask import abort, Flask, jsonify, request
 from models import storage
 from models.city import City
 
@@ -56,14 +56,14 @@ def delete_city(city_id):
 def create_city(state_id):
     """Creates a new city object for a specified State id"""
     if not request.get_json():
-        return jsonify({'error': 'Not a JSON'})
+        return jsonify({'error': 'Not a JSON'}), 400
     elif "name" not in request.get_json():
-        return jsonify({'error': 'Missing name'})
+        return jsonify({'error': 'Missing name'}), 400
     else:
         obj_data = request.get_json()
         state = storage.get('State', state_id)
         if state is None:
-            return jsonify({'error': 'State not found'})
+            return jsonify({'error': 'State not found'}), 404
         obj_data['state_id'] = state.id
         obj = City(**obj_data)
         obj.save()
@@ -72,13 +72,13 @@ def create_city(state_id):
 
 @app_views('api/v1/cities/<city_id>',
            methods=['PUT'], strict_slashes=False)
-def create_city(state_id):
+def update_city(city_id):
     """Updates a City object by city_id"""
     if not request.get_json():
         return jsonify({'error': 'Not a JSON'})
 
     obj = storage.get('City', city_id)
-    if city is None:
+    if obj is None:
         return jsonify({'error': 'City not found'}), 404
 
     obj_data = request.get_json()

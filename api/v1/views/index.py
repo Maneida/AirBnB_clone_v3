@@ -12,7 +12,8 @@ from models.user import User
 
 
 @app_views.route('/', defaults={'page': 'index'})
-@app_views.route('/status')
+@app_views.route('/status',
+                 methods=['GET'], strict_slashes=False)
 def api_status():
     """Get the status of the API.
 
