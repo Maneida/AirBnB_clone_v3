@@ -2,10 +2,9 @@
 """
     App for registering blueprint and starting flask
 """
-from flask import Flask, Blueprint
+from flask import Flask, jsonify, Blueprint
 from models import storage
 from api.v1.views import app_views
-from flask import jsonify
 import os
 
 app = Flask(__name__)
@@ -19,7 +18,7 @@ def close_storage(exception=None):
     Args:
         exception (Exception): The exception that occurred, if any.
     """
-    storage.close
+    storage.close()
 
 
 @app.errorhandler(404)

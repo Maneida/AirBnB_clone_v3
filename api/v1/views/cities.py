@@ -21,7 +21,7 @@ def get_state_city_list(state_id):
 
 
 @app_views('/api/v1/cities/<city_id>',
-           methods=[GET], strict_slashes=False)
+           methods=['GET'], strict_slashes=False)
 def get_city_id(city_id):
     """GET City object by city_id"""
     city = storage.get('City', city_id)
