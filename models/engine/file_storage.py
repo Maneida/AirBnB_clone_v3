@@ -56,7 +56,7 @@ class FileStorage:
             for key in jo:
                 self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
         except Exception as e:
-            print(f"Error: {e}")
+            print("Error: {}".format(e))
 
     def delete(self, obj=None):
         """delete obj from __objects if it’s inside"""
