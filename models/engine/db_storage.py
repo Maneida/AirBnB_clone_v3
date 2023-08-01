@@ -83,8 +83,15 @@ class DBStorage:
             return self.__session.query(cls).get(id)
         return None
 
-    def count(self, cls):
-        """ Returns count of objects in a class passed as argument
+    def count(self, cls=None):
         """
-        all_cls_obj = self.all(cls)
-        return len(all_cls_objs)
+        Returns count of objects in a class passed as argument
+        or all objects if no class is passed
+        """
+        if cls:
+            return self.__session.query(cls).count()
+        else:
+            total_count = 0
+            for cls in Base.__subclasses__():
+                total_count += self.__session.query(cls).count()
+            return total_count
