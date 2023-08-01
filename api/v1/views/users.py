@@ -42,9 +42,9 @@ def create_user():
     """Creates a new User object"""
     if not request.get_json():
         return jsonify({'error': 'Not a JSON'}), 400
-    elif not in "email" in request.get_json():
+    elif "email" not in request.get_json():
         return jsonify({'error': 'Missing email'}), 400
-    elif not in "password" in request.get_json():
+    elif "password" not in request.get_json():
         return jsonify({'error': 'Missing password'}), 400
     else:
         obj_data = request.get_json()
