@@ -3,7 +3,7 @@
 RESTful API for the City class
 """
 from api.v1.views import app_views
-from flask import abort, Flask, jsonify, request
+from flask import abort, Flask, jsonify, request, Blueprint
 from models import storage
 from models.city import City
 
