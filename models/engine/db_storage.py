@@ -80,7 +80,7 @@ class DBStorage:
             arguments
         """
         if cls in classes.values() and id:
-            key = '{}.{}'.format(cls, id)
+            key = '{}-{}'.format(cls.__name__, id)
             objs = self.all(cls)
             return objs.get(key)
         return None
