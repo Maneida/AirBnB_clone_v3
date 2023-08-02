@@ -1,5 +1,9 @@
 #!/usr/bin/python3
-""" Index api methods """
+""" Index api methods
+    Contains:
+        api_status: for checking status of API
+        api_stats: for getting stats of each Class
+"""
 
 from api.v1.views import app_views
 from flask import jsonify
@@ -26,7 +30,10 @@ def api_status():
 
 @app_views.route('/stats', methods=['GET'], strict_slashes=False)
 def api_stats():
-    """Gets stat of all class data"""
+    """Gets stat of all class data
+       Returns:
+            JSON object: { "Class": count }
+    """
 
     all_cls = [Amenity, City, Place, Review, State, User]
     names = ["amenities", "cities", "places", "reviews", "states", "users"]
