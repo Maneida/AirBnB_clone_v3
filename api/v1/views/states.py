@@ -52,7 +52,7 @@ def api_states(state_id):
             return make_response(jsonify({}), 200)
         else:
             abort(404)
-    elif request.method == ['PUT']:
+    elif request.method == 'PUT':
         key = 'State' + '.' + state_id
 
         try:
