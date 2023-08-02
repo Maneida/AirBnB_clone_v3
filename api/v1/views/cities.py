@@ -3,16 +3,17 @@
 RESTful API for the City class
 """
 from api.v1.views import app_views
-from flask import abort, Flask, jsonify, request, Blueprint
+from flask import abort, jsonify
 from models import storage
 from models.city import City
+from models.state import State
 
 
 @app_views.route('/api/v1/states/<state_id>/cities',
                  methods=['GET'], strict_slashes=False)
 def get_state_city_list(state_id):
     """GET city list by State given state_id"""
-    state = storage.get('State', state_id)
+    state = storage.get(State, state_id)
     if state is None:
         abort(404)
 
@@ -22,9 +23,9 @@ def get_state_city_list(state_id):
 
 @app_views.route('/api/v1/cities/<city_id>',
                  methods=['GET'], strict_slashes=False)
-def get_city_id(city_id):
+def get_city(city_id):
     """GET City object by city_id"""
-    city = storage.get('City', city_id)
+    city = storage.get(City, city_id)
     if city is None:
         abort(404)
 
@@ -43,7 +44,7 @@ def delete_city(city_id):
         json: empty dict with status code 200 on success
         json: status code 404 if city_id is not linked to any City object
     """
-    city = storage.get('City', city_id)
+    city = storage.get(City, city_id)
     if city is None:
         return jsonify({'error': 'City not found'}), 404
     city.delete()
@@ -61,7 +62,7 @@ def create_city(state_id):
         return jsonify({'error': 'Missing name'}), 400
     else:
         obj_data = request.get_json()
-        state = storage.get('State', state_id)
+        state = storage.get(State, state_id)
         if state is None:
             return jsonify({'error': 'State not found'}), 404
         obj_data['state_id'] = state.id
@@ -77,7 +78,7 @@ def update_city(city_id):
     if not request.get_json():
         return jsonify({'error': 'Not a JSON'})
 
-    obj = storage.get('City', city_id)
+    obj = storage.get(City, city_id)
     if obj is None:
         return jsonify({'error': 'City not found'}), 404
 
