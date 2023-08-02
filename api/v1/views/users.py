@@ -7,7 +7,7 @@ from models.user import User
 
 
 @app_views.route('/api/v1/users',
-           methods=['GET'], strict_slashes=False)
+                 methods=['GET'], strict_slashes=False)
 def get_user_list():
     """Retrieves list of all user objects"""
     user_list = [user.to_dict() for user in storage.all('User').values()]
@@ -15,7 +15,7 @@ def get_user_list():
 
 
 @app_views.route('api/v1/users/<user_id>',
-           methods=['GET'], strict_slashes=False)
+                 methods=['GET'], strict_slashes=False)
 def get_user(user_id):
     """Retrieves a user object by user_id"""
     user = storage.get('User', user_id)
@@ -25,7 +25,7 @@ def get_user(user_id):
 
 
 @app_views.route('api/v1/users/<user_id>',
-           methods=['DELETE'], strict_slashes=False)
+                 methods=['DELETE'], strict_slashes=False)
 def delete_user(user_id):
     """Deletes a User object by user_id"""
     user = storage.get('User', user_id)
@@ -37,7 +37,7 @@ def delete_user(user_id):
 
 
 @app_views.route('api/v1/users',
-           methods=['POST'], strict_slashes=False)
+                 methods=['POST'], strict_slashes=False)
 def create_user():
     """Creates a new User object"""
     if not request.get_json():
@@ -54,7 +54,7 @@ def create_user():
 
 
 @app_views.route('api/v1/users/<user_id>',
-           methods=['PUT'], strict_slashes=False)
+                 methods=['PUT'], strict_slashes=False)
 def update_user(user_id):
     """Updates a User object by user_id"""
     if not request.get_json():

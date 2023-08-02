@@ -21,7 +21,7 @@ def get_state_city_list(state_id):
 
 
 @app_views.route('/api/v1/cities/<city_id>',
-           methods=['GET'], strict_slashes=False)
+                 methods=['GET'], strict_slashes=False)
 def get_city_id(city_id):
     """GET City object by city_id"""
     city = storage.get('City', city_id)
@@ -32,7 +32,7 @@ def get_city_id(city_id):
 
 
 @app_views.route('api/v1/cities/<city_id>',
-           methods=['DELETE'], strict_slashes=False)
+                 methods=['DELETE'], strict_slashes=False)
 def delete_city(city_id):
     """DELETE city obj by city_id
 
@@ -52,7 +52,7 @@ def delete_city(city_id):
 
 
 @app_views.route('api/v1/states/<state_id>/cities',
-           methods=['POST'], strict_slashes=False)
+                 methods=['POST'], strict_slashes=False)
 def create_city(state_id):
     """Creates a new city object for a specified State id"""
     if not request.get_json():
@@ -71,7 +71,7 @@ def create_city(state_id):
 
 
 @app_views.route('api/v1/cities/<city_id>',
-           methods=['PUT'], strict_slashes=False)
+                 methods=['PUT'], strict_slashes=False)
 def update_city(city_id):
     """Updates a City object by city_id"""
     if not request.get_json():
