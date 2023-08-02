@@ -33,11 +33,43 @@ def api_states_no_id():
 @app_views.route('/states/<state_id>', methods=['GET', 'PUT', 'DELETE'],
                  strict_slashes=False)
 def api_states(state_id):
-    """Handles Get, Put, and Delete api request on states with id"""
+    """Handles Get, Put, and Delete api request on states corresponding id"""
 
     states = storage.all(State)
 
     if request.method == 'GET':
         key = 'State' + '.' + state_id
+        try:
+            return jsonify(states[key].to_dict())
+        except KeyError:
+            abort(404)
 
-        return (jsonify(states[key]))
+    elif request.method == 'DELETE':
+        state = storage.get(State, state_id)
+        if state:
+            storage.delete(state)
+            storage.save()
+            return make_response(jsonify({}), 200)
+        else:
+            abort(404)
+    elif request.method = ['PUT']:
+        key = 'State' + '.' + state_id
+
+        try:
+            state = states[key]
+
+            if not request.get_json():
+                abort(404, 'Not a JSON')
+            else:
+                data = request.get_json()
+                no_put = ['id', 'updated_at', 'created_at']
+
+                for key, value in data.items():
+                    if key not in no_put:
+                        setattr(state, key, value)
+                storage.save()
+                return make_response(jsonify(state.to_dict()), 200)
+        except KeyError:
+            abort(404)
+    else:
+        abort(501)
