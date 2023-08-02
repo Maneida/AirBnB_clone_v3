@@ -92,15 +92,15 @@ class TestFileStorage(unittest.TestCase):
         """Test for getting an instance db storage"""
         temp = {"name": "Test"}
         obj = State(**temp)
-        storage.new(obj)
-        storage.save()
-        test_instance = storage.get(State, obj.id)
+        models.storage.new(obj)
+        models.storage.save()
+        test_instance = models.storage.get(State, obj.id)
         self.assertEqual(test_instance, obj)
 
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_count(self):
         """Tests count method for counting objects/instances"""
-        initial_count = storage.count()
+        initial_count = models.storage.count()
         temp = {"name": "TestState"}
         state_obj = State(**temp)
         models.storage.new(state_obj)  # Use 'models.storage' due to import.
