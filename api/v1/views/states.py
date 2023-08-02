@@ -27,7 +27,7 @@ def api_states_no_id():
         new = State(**request_body)
         storage.new(new)
         storage.save()
-        return make_reponse(jsonify(new.to_dict()), 201)
+        return make_response(jsonify(new.to_dict()), 201)
 
 
 @app_views.route('/states/<state_id>', methods=['GET', 'PUT', 'DELETE'],
