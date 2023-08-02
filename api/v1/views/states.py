@@ -59,7 +59,7 @@ def api_states(state_id):
             state = states[key]
 
             if not request.get_json():
-                abort(404, 'Not a JSON')
+                abort(400, 'Not a JSON')
             else:
                 data = request.get_json()
                 no_put = ['id', 'updated_at', 'created_at']
