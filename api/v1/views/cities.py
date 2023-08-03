@@ -3,13 +3,13 @@
 RESTful API for the City class
 """
 from api.v1.views import app_views
-from flask import abort, jsonify
+from flask import abort, jsonify, request
 from models import storage
 from models.city import City
 from models.state import State
 
 
-@app_views.route('/api/v1/states/<state_id>/cities',
+@app_views.route('/states/<state_id>/cities',
                  methods=['GET'], strict_slashes=False)
 def get_state_city_list(state_id):
     """GET city list by State given state_id"""
@@ -21,7 +21,7 @@ def get_state_city_list(state_id):
     return jsonify(cities), 200
 
 
-@app_views.route('/api/v1/cities/<city_id>',
+@app_views.route('/cities/<city_id>',
                  methods=['GET'], strict_slashes=False)
 def get_city(city_id):
     """GET City object by city_id"""
@@ -32,7 +32,7 @@ def get_city(city_id):
     return jsonify(city.to_dict()), 200
 
 
-@app_views.route('api/v1/cities/<city_id>',
+@app_views.route('/cities/<city_id>',
                  methods=['DELETE'], strict_slashes=False)
 def delete_city(city_id):
     """DELETE city obj by city_id
@@ -52,7 +52,7 @@ def delete_city(city_id):
     return jsonify({}), 200
 
 
-@app_views.route('api/v1/states/<state_id>/cities',
+@app_views.route('/states/<state_id>/cities',
                  methods=['POST'], strict_slashes=False)
 def create_city(state_id):
     """Creates a new city object for a specified State id"""
@@ -71,7 +71,7 @@ def create_city(state_id):
         return jsonify(obj.to_dict()), 201
 
 
-@app_views.route('api/v1/cities/<city_id>',
+@app_views.route('/cities/<city_id>',
                  methods=['PUT'], strict_slashes=False)
 def update_city(city_id):
     """Updates a City object by city_id"""
