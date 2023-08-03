@@ -73,8 +73,8 @@ class FileStorage:
         """ Gets and object through its class and id, passed as
             arguments
         """
-        if cls in classes.values() and id:
-            key = '{}.{}'.format(cls.__name__, id)
+        if cls in classes and id:
+            key = '{}.{}'.format(cls, id)
             objs = self.all(cls)
             return objs.get(key)
         return None
