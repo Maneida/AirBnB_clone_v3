@@ -76,13 +76,16 @@ def create_city(state_id):
 def update_city(city_id):
     """Updates a City object by city_id"""
     if not request.get_json():
-        return jsonify({'error': 'Not a JSON'})
+        return jsonify({'error': 'Not a JSON'}), 400
 
     obj = storage.get(City, city_id)
     if obj is None:
         return jsonify({'error': 'City not found'}), 404
 
     obj_data = request.get_json()
-    obj.name = obj_data['name']
+    ignore = ("id", "state_id", "created_at", "updated_at")
+    for key in obj_data.keys():
+        if key not in ignore:
+            obj[key] = obj_data[key]
     obj.save()
     return jsonify(obj.to_dict()), 200
