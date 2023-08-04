@@ -84,8 +84,8 @@ def update_city(city_id):
 
     obj_data = request.get_json()
     ignore = ("id", "state_id", "created_at", "updated_at")
-    for key in obj_data.keys():
+    for key, value in obj_data.items():
         if key not in ignore:
-            obj[key] = obj_data[key]
+            setattr(obj, key, value)
     obj.save()
     return jsonify(obj.to_dict()), 200
